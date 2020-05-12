@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Famous Budget Application</title>
+	
+    <link href="\static\bootstrap-4.4.1-dist\css\bootstrap.min.css" rel="stylesheet">
+	<link href="\static\base.css" rel="stylesheet">
+  </head>	
+	
+
+  <body>
+    <div class="container">	
+		<div class="row">
+			<div class="col-md-10 col-md-offset-3 jumbotron">
+				<div class="text-center">
+					<h1>{% block header_text %}{% endblock %}</h1>
+					<h2> {% block name_text %} {% endblock %}</h2>
+					{% block optional_info_text %} {% endblock %}
+					<form method="POST" action="{% block form_action %}{% endblock %}">
+						{% csrf_token %}
+						{% block form_one %}{% endblock %}
+						{% block button_one %}{% endblock %}
+					</form>
+				</div>
+			</div>
+			<div class="alert alert-dark col-md-10" role="alert" >
+				<form method="POST" action="{% block optional_action %}{% endblock %}">
+					{% csrf_token %}
+					{% block optional_item %}{% endblock %}
+					{% block button_two %}{% endblock %}
+				</form>
+			</div>
+			<div class="alert alert-primary col-md-10">
+				<h3 class="display-5"> {% block optional_item2 %}{% endblock %}</h3>
+				<h3 class="display-5"> {% block optional_item_header %}{% endblock %}</h3>
+				{% block list_loop %} {% endblock %}
+			</div>
+
+		</div>
+		<!-- <div class="jumbotron">
+			
+		</div> -->
+    </div>
+  </body>
+
+
+</html>

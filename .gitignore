@@ -4,5 +4,7 @@ featurns.txt
 geckodrive.log
 db.sqlite3
 *.sqlite3
-\budgetReboot\static\bootstrap-4.4.1-dist
-bootstrap.css
+/budgetReboot/migrations
+/budgetReboot/static/bootstrap-4.4.1-dist
+/budgetReboot/static/bootstrap.css.map
+/budgetReboot/__pycache__

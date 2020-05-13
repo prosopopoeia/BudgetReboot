@@ -7,6 +7,6 @@ def test_index_exists(self):
     self.assertTemplateUsed(response, 'budgetReboot/index.html')
     
     
-# def test_return_new_user_template(self):
-    # response = self.client.get('/')
-    # self.s
+def test_return_find_returning_user(self):
+    response = self.client.post('/listcats')    
+    self.s

@@ -1,0 +1,34 @@
+user JIM
+avg total spent per month
+avg total earned per month
+
+earned for this month
+spent this month
+[comparison with previous months spending at current point]
+
+-categories-
+
+groceries: total spent current month   *click for details & CRUD ops*
+	[total spent at current period prior month]
+ 
+gasoline: total spent current month   *click for details & CRUD ops*
+	[total spent at current point in prior month[]
+etc.
+
+
++++++++++++DETAIL PAGE++++++++++++++++++
+cat name
+# of entries
+avg number of entries#
+[NUMBER OF ENTRIES AT CURRENT POINT PREVIOUS MO.]
+total for month
+avg monthly cost
+[total AT CURRENT POINT PREVIOUS MO.]
+
+
+-entries-
+entry1
+date of entry			[edit entry]
+amount
+
+entry2...

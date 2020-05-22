@@ -2,6 +2,6 @@
 
 {% block header_text %}Information Form.{% endblock %}
 {% block name_text %} Enter Information {% endblock %}
-{% block form_action %}{%  url 'budgetReboot:index' %}{% endblock %}
-{% block form_one %}  {{ form }} {% endblock %}
-{% block button_one %}<input type="submit" value="add">{% endblock %}
+{% block post_form_action %}{%  url 'budgetReboot:listcats' %}{% endblock %}
+{% block post_form_item %}  {{ form }} {% endblock %}
+{% block post_form_button %}<input type="submit" value="add">{% endblock %}

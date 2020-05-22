@@ -15,25 +15,38 @@
   <body>
     <div class="container">	
 		<div class="row">
+		
+			<div class="alert alert-danger col-md-10 col-md-offset-3" role="alert">
+			<div class="text-center">				
+				<h1>{% block header_text %}{% endblock %}</h1>
+				<h2> <small class="text-muted"> {% block name_text %} {% endblock %} </small></h2>
+			</div>				
+			</div>
+<!---------------------- POST form section -->
+			
 			<div class="col-md-10 col-md-offset-3 jumbotron">
-				<div class="text-center">
-					<h1>{% block header_text %}{% endblock %}</h1>
-					<h2> {% block name_text %} {% endblock %}</h2>
-					{% block optional_info_text %} {% endblock %}
-					<form method="POST" action="{% block form_action %}{% endblock %}">
+				<div class="text-center">				
+					{% block post_form_header %} {% endblock %} 
+					<form method="POST" action="{% block post_form_action %}{% endblock %}">
 						{% csrf_token %}
-						{% block form_one %}{% endblock %}
-						{% block button_one %}{% endblock %}
+						{% block post_form_item %}{% endblock %}
+						{% block post_form_button %}{% endblock %}
 					</form>
 				</div>
 			</div>
-			<div class="alert alert-dark col-md-10" role="alert" >
-				<form method="POST" action="{% block optional_action %}{% endblock %}">
+			
+<!-------------------- GET form section -->
+			
+			<div class="alert alert-dark col-md-10" role="alert" >	
+				{% block get_form_header %} {% endblock %} 
+				<form method="GET" action="{% block get_form_action %}{% endblock %}">
 					{% csrf_token %}
-					{% block optional_item %}{% endblock %}
-					{% block button_two %}{% endblock %}
+					{% block get_form_item %}{% endblock %}
+					{% block get_form_button %}{% endblock %}
 				</form>
 			</div>
+			
+<!-------------------- loop with header section -->
 			<div class="alert alert-primary col-md-10">
 				<h3 class="display-5"> {% block optional_item2 %}{% endblock %}</h3>
 				<h3 class="display-5"> {% block optional_item_header %}{% endblock %}</h3>
@@ -41,11 +54,7 @@
 			</div>
 
 		</div>
-		<!-- <div class="jumbotron">
-			
-		</div> -->
     </div>
   </body>
-
 
 </html>

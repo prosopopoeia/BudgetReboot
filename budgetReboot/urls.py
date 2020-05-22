@@ -20,4 +20,6 @@ from . import views
 app_name = 'budgetReboot'
 urlpatterns = [
     path('', views.indexView.as_view(), name='index'),
+    path('listcats/', views.listcatsView.as_view(), name='listcats'),
+    path('listcats/<str:pusers_name>', views.listcatsView.as_view(), name='listcats'),
 ]

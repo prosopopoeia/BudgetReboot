@@ -1,7 +1,7 @@
 {% extends 'budgetReboot/base.html' %}
 
 {% block header_text %} {{ display_user_name }}{% endblock %}
-{% block name_text %} Enter Information {% endblock %}
+{% block name_text %} Enter Informationlistcat {% endblock %}
 {% block post_form_action %}{%  url 'budgetReboot:listcats' display_user_name %}{% endblock %}
 {% block post_form_item %}  {{ formy }} {% endblock %}
 {% block post_form_button %}<input type="submit" value="add">{% endblock %}
@@ -11,12 +11,19 @@
 <!-- {% block button_two %}<input type="submit" value="add">{% endblock %} -->
 
 {% block list_loop %}
-<ul>
+	<ul>
 
-{% for cat in display_user_cats %}
-    <li>{{ cat.category_name }} - </li>
-	
-{% endfor %}
+		{% for cat in display_user_cats %}
+			<li>
+				{{ cat.category_name }}: 
+				
+				<form method="Post" action=" {% url 'budgetReboot:catdetail' cat.category_name %}">  
+					<input type="hidden" name="h_users_name" value="{{ display_user_name }}">
+					<input type="submit" value="view {{ cat.category_name }}" name="category_detail" id="id_cat_detail">
+					{% csrf_token %}
+				</form>
+			</li>			
+		{% endfor %}
 
-</ul>
+	</ul>
 {% endblock %}

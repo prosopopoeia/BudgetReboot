@@ -1,0 +1,11 @@
+{% extends 'budgetReboot/base.html' %}
+
+{% block header_text %} {{ display_user_name }}{% endblock %}
+{% block name_text %} Enter Informationnewnuser {% endblock %}
+{% block post_form_action %}{%  url 'budgetReboot:listcats' display_user_name %}{% endblock %}
+{% block post_form_item %}  {{ form }} {% endblock %}
+{% block post_form_button %}<input type="submit" value="add">{% endblock %}
+
+<!-- {% block optional_action %}{%  url 'budgetReboot:listcats' display_user_name %}{% endblock %} -->
+
+<!-- {% block button_two %}<input type="submit" value="add">{% endblock %} -->

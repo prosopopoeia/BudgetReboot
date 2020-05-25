@@ -21,5 +21,7 @@ app_name = 'budgetReboot'
 urlpatterns = [
     path('', views.indexView.as_view(), name='index'),
     path('listcats/', views.listcatsView.as_view(), name='listcats'),
-    path('listcats/<str:pusers_name>', views.listcatsView.as_view(), name='listcats'),
+    path('usertype/', views.usertypeView.as_view(), name='usertype'),
+    path('listcats/<str:p_users_name>', views.listcatsView.as_view(), name='listcats'),
+    path('catdetail/<str:h_category_name>', views.catdetailView.as_view(), name='catdetail'),
 ]

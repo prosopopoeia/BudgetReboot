@@ -14,7 +14,7 @@ from budgetReboot.models import Category, User
 class NewUserTest(TestCase):
 
     def test_handle_new_user(self):
-        self.client.post('/listcats/', data={'users_name': 'Kip'})
+        self.client.post('/usertype/', data={'users_name': 'Kip'})
         self.assertEqual(Category.objects.count(), 0)
         self.assertEqual(User.objects.count(), 1)
         
@@ -26,13 +26,30 @@ class NewUserTest(TestCase):
         
 class ExistingUserTest(TestCase):
     
-    def test_user_exists(self):
-    
-        existing_user = User(users_name='Foot-Foot')
+    def createUser(self, p_users_name):
+        existing_user = User(users_name=p_users_name)
         existing_user.save()
-        users_cat = Category(owning_user=existing_user, category_name='shoes')
+        return existing_user
+        
+    def createCategory(self, p_user, p_cat_name):
+        users_cat = Category(owning_user=p_user, category_name=p_cat_name)
         users_cat.save()
-        response = self.client.post('/listcats/', data={'users_name' : 'Foot-Foot'})
+        return users_cat
+        
+        
+        
+    def test_user_exists(self):    
+        test_user = self.createUser('Foot-Foot')
+        self.createCategory(test_user, 'shoes')
+        response = self.client.post('/usertype/', data={'users_name' : 'Foot-Foot'})
         self.assertContains(response, "shoes")
         
+        
+    def test_get_next_cat(self):
+        test_user = self.createUser('Foot-Foot')        
+        self.createCategory(test_user, 'shoes')
+        user_cats = self.createCategory(test_user, 'bags')
+        second_cat = Category.objects.filter(owning_user=test_user)[1]
+        self.assertEqual(second_cat.category_name, 'bags')
+ 
         

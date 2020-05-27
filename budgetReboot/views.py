@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.edit import FormView
 from .forms import NameForm, AddCatForm
-from .models import Category, User, Entry, CatPeriod
+from .models import Category, User, Entry, CatPeriod, AggregateStats
 from django.shortcuts import get_object_or_404
 
 
@@ -27,19 +27,17 @@ class usertypeView(FormView):
             return render(request, template_name, {'form' : self.form_class, 'display_user_name' : v_user_name})
         
         v_users_categories = Category.objects.filter(owning_user = v_user)
-        return render(request, template_name, {'form' : self.form_class, 'display_user_name' : v_user_name, 'display_user_cats' : v_users_categories})
+        return render(request, template_name, {'formy' : self.form_class, 'display_user_name' : v_user_name, 'display_user_cats' : v_users_categories})
         
 class catdetailView(FormView):
     template_name = 'budgetReboot/catdetail.html'
     
     def post(self, request, h_category_name):
         p_users_name = request.POST.get('h_users_name')
-        formage = AddCatForm()
-       
+        formage = AddCatForm()       
             
         # v_user = get_object_or_404(User, users_name=p_users_name)   
-        
-        
+                
         # new_category = Category()
         # new_category.category_name = v_new_category_name
         # new_category.owning_user = v_user   
@@ -54,7 +52,7 @@ class catdetailView(FormView):
 class listcatsView(FormView):
     template_name = 'budgetReboot/listcats.html'
     form_class = AddCatForm()
-    success_url = 'budgetReboot/listcats.html'
+    #success_url = 'budgetReboot/listcats.html'
     
         
     def post(self, request, p_users_name):

@@ -4,8 +4,9 @@ from django.contrib import admin
 
 # Okay.
 
-from .models import User, Category, CatPeriod, Entry
+from .models import User, Category, CatPeriod, Entry, AggregateStats
 admin.site.register(User)
 admin.site.register(Category)
 admin.site.register(CatPeriod)
 admin.site.register(Entry)
+admin.site.register(AggregateStats)

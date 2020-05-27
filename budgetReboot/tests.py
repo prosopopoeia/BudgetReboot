@@ -51,5 +51,12 @@ class ExistingUserTest(TestCase):
         user_cats = self.createCategory(test_user, 'bags')
         second_cat = Category.objects.filter(owning_user=test_user)[1]
         self.assertEqual(second_cat.category_name, 'bags')
+        
+    def test_see_cat_detail(self):
+        test_user = self.createUser('Foot-Foot')        
+        #self.createCategory(test_user, 'shoes')
+        user_cats = self.createCategory(test_user, 'bags')
+        response = self.client.post('/catdetail/bags', data={'users_name': 'Foot-Foot'})
+        self.assertContains(response, "bags")
  
         

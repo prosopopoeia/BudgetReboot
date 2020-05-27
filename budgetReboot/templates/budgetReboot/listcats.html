@@ -2,6 +2,7 @@
 
 {% block header_text %} {{ display_user_name }}{% endblock %}
 {% block name_text %} Enter Informationlistcat {% endblock %}
+{% block data_ag %} {% endblock %}
 {% block post_form_action %}{%  url 'budgetReboot:listcats' display_user_name %}{% endblock %}
 {% block post_form_item %}  {{ formy }} {% endblock %}
 {% block post_form_button %}<input type="submit" value="add">{% endblock %}

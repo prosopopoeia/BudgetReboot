@@ -38,11 +38,9 @@ class CatPeriod(models.Model):
     
     monthly_total = models.DecimalField(default=0, max_digits=11, decimal_places=2)    
     monthly_entry_count = models.IntegerField(default=0)
-    
+        
     cat = models.ForeignKey(Category, on_delete=models.CASCADE)
-    
-    
-    
+        
     
 class Entry(models.Model):
     cat = models.ForeignKey(CatPeriod, on_delete=models.CASCADE)
@@ -64,4 +62,15 @@ class AggregateStats(models.Model):
     grand_income = models.DecimalField(default=0, max_digits=9, decimal_places=2)
     avg_monthly_income  = models.DecimalField(default=0, max_digits=9, decimal_places=2)
     number_of_months = models.IntegerField(default=0)
-    current_month_total = models.DecimalField(default=0, max_digits=8, decimal_places=2)
+    
+    
+class AgStatsPeriod(models.Model):
+    ag = models.ForeignKey(AggregateStats, on_delete=models.CASCADE)
+    
+    numeric_month = models.IntegerField(default=timezone.now().month)
+    numeric_year = models.IntegerField(default=timezone.now().year)
+    
+    month_total = models.DecimalField(default=0, max_digits=9, decimal_places=2)
+    month_income = models.DecimalField(default=0, max_digits=9, decimal_places=2)
+    
+    

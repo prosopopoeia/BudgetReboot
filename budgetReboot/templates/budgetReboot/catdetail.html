@@ -1,10 +1,57 @@
 {% extends 'budgetReboot/base.html' %}
 
-{% block header_text %} {{ display_cat_name }}{% endblock %}
-{% block name_text %} Enter Information {{ display_user_name }} {% endblock %}
+{% block header_text %}top {{ display_cat.category_name }}{% endblock %}
+{% block name_text %} 
+	Enter Information {{ display_user_name }} <br> 
+	mo totes {{ display_cat_period.monthly_total }}
+	
+{% endblock %}
 {% block post_form_action %}{%  url 'budgetReboot:listcats' display_user_name %}{% endblock %}
 {% block post_form_item %}  {{ formy }} {% endblock %}
 {% block post_form_button %}<input type="submit" value="add">{% endblock %}
+
+
+{% block list_loop %}
+
+<table>
+	{% for ent in display_entries %}
+		<tr><td><hr class="shadow p-1 mb-3 bg-white rounded" /></td></tr>
+		<tr><td>
+			<form method="Post" action=" {% url 'budgetReboot:catdetail' display_cat.category_name %}">
+				<input type="hidden" name="h_users_name" value="{{ display_user_name }}">
+				<input type="submit" value="delete {{ ent.id }}" name="category_detail" id="id_cat_detail">
+				<input type="submit" value="modify {{ ent.id }}" name="category_detail" id="id_cat_detail">
+				{% csrf_token %}
+			</form>
+			<table id="id_inner_entry" class="table">
+			<tr>
+				<td>Entry Number</td>
+				<td>Item</td>
+				<td>Amount</td>
+				<td>Date</td>
+				<td>Notes</td>
+			</tr>
+			<tr>
+				<td>{{ ent.id }} </td>
+				<td>{{ ent.cat.cat.category_name }}</td>
+				<td>{{ ent.amount }} </td>		
+				<td>{{ ent.transaction_date }}</td>	
+				<td>{{ ent.entry_note }}  </td>
+			</tr>
+			</table>
+		</td></tr>
+	 {% endfor %}
+	<ul>
+<li>here {{ display_entries }} </li>
+		{% for entry in display_entries %}
+			<li>
+				{{ entry.entry_note }}: 				
+				
+			</li>			
+		{% endfor %}
+
+	</ul>
+{% endblock %}
 
 <!-- {% block optional_action %}{%  url 'budgetReboot:listcats' display_user_name %}{% endblock %} -->
 

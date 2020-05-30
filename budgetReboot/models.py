@@ -20,7 +20,7 @@ class Category(models.Model):
     owning_user = models.ForeignKey(User, on_delete=models.CASCADE)
     category_name = models.CharField(max_length=200)    
     
-    overall_total = models.DecimalField(default=0, max_digits=11, decimal_places=2)
+    overall_total = models.DecimalField(default=0, max_digits=11,  decimal_places=2)
     total_entries = models.IntegerField(default=0)
 
 

@@ -1,12 +1,11 @@
 from django.db import models
 from django.utils import timezone
 
-
-#                        user
+      #                        user
          #                 /    |     \
-       # categories bank |food  |entertainment| personal care
+       #                   categories bank |food  |entertainment| personal care
        #                / |                |                                   \
-         # period    jan   feb  dec     (...+year)   etc.
+         #            period    jan   feb  dec     (...+year)   etc.
      #                             /       |             \
     # entries                     entry1  entry2    entry 1   etc. 
 

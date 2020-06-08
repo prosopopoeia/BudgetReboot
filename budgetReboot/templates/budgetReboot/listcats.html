@@ -1,17 +1,19 @@
 {% extends 'budgetReboot/base.html' %}
 
 {% block header_text %} {{ display_user_name }}{% endblock %}
-{% block name_text %} Enter Informationlistcat {% endblock %}
+{% block name_text %} Enter Information {% endblock %}
 {% block data_ag %}
+	{{ tmo }}
 	Grand total ever spent: {{ agstats.grand_total }} <br \>
-	month total: {{ p_agstats.month_total }} <br \> avg_monthly: {{ p_agstats.month_income }} {% endblock %}
+	month total: {{ p_agstats.month_total }} <br \> Income for month: {{ p_agstats.month_income }}
+<br /> {{ p_agstats.numeric_month }} ++ {{ temp }}	
+{% endblock %}
+
+
 {% block post_form_action %}{%  url 'budgetReboot:listcats' display_user_name %}{% endblock %}
 {% block post_form_item %}  {{ formy }} {% endblock %}
 {% block post_form_button %}<input type="submit" value="add">{% endblock %}
 
-<!-- {% block optional_action %}{%  url 'budgetReboot:listcats' display_user_name %}{% endblock %} -->
-
-<!-- {% block button_two %}<input type="submit" value="add">{% endblock %} -->
 
 {% block list_loop %}
 	<ul>

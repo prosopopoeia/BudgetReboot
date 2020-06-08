@@ -1,0 +1,16 @@
+{% extends 'budgetReboot/base.html' %}
+
+
+{% block header_text %}detail{% endblock %}
+{% block name_text %} 
+	User Name: {{ display_user_name }} <br /> 
+	note: {{ entry.entry_note }}  {{ entry }}
+	{{ model.entry_note }}
+	{{ Entry.entry_note }}
+	
+{% endblock %}
+
+
+<!-- {% block optional_action %}{%  url 'budgetReboot:listcats' display_user_name %}{% endblock %} -->
+
+<!-- {% block button_two %}<input type="submit" value="add">{% endblock %} -->

@@ -1,28 +1,59 @@
 {% extends 'budgetReboot/base.html' %}
 
-{% block header_text %}top {{ display_cat.category_name }}{% endblock %}
+
+{% block header_text %}Category: {{ display_cat.category_name }}{% endblock %}
 {% block name_text %} 
-	Enter Information {{ display_user_name }} <br> 
-	mo totes {{ display_cat_period.monthly_total }}
+	User Name: {{ display_user_name }} 
+	
 	
 {% endblock %}
-{% block post_form_action %}{%  url 'budgetReboot:listcats' display_user_name %}{% endblock %}
-{% block post_form_item %}  {{ formy }} {% endblock %}
-{% block post_form_button %}<input type="submit" value="add">{% endblock %}
 
+{% block post_form_header %}<h4> Add New Entry </h4> {% endblock %}
+{% block list_link1 %} <a href="{%  url 'budgetReboot:listcats' display_user_name %}">Category List</a> {% endblock %}
+
+{% block post_form_action2 %}{%  url 'budgetReboot:archivelist' display_cat.category_name %}{% endblock %}
+{% block post_form_item2 %} 
+	{{ archiveform }} 
+	<input type="hidden" name="h_users_name" value="{{ display_user_name }}">
+{% endblock %}
+{% block post_form_button2 %}<input type="submit" value="select date">{% endblock %}
+ 
+ 
+{% block post_form_action %}{%  url 'budgetReboot:catdetail' display_cat.category_name %}{% endblock %}
+{% block post_form_item %}  {{ formy }} {% endblock %}
+{% block post_form_button %}
+	<input type="submit" value="add">
+	<input type="hidden" name="h_users_name" value="{{ display_user_name }}">
+{% endblock %}
+
+
+
+
+{% block get_text %}
+	Spent on {{ display_cat.category_name }} this month: {{ display_cat_period.monthly_total }} <br />
+	Average amount spent per transaction (month): {{ month_avg }} <br />
+	Number of transactions: {{ display_cat_period.monthly_entry_count }} <br />
+	Average amount spent per transaction (all): {{ all_time_avg }}
+{% endblock %} 
 
 {% block list_loop %}
 
 <table>
+	{% if display_entries %}
 	{% for ent in display_entries %}
-		<tr><td><hr class="shadow p-1 mb-3 bg-white rounded" /></td></tr>
+		
 		<tr><td>
-			<form method="Post" action=" {% url 'budgetReboot:catdetail' display_cat.category_name %}">
+			
+			<form method="Post" action=" {% url 'budgetReboot:delentry' ent.id %}">
 				<input type="hidden" name="h_users_name" value="{{ display_user_name }}">
-				<input type="submit" value="delete {{ ent.id }}" name="category_detail" id="id_cat_detail">
-				<input type="submit" value="modify {{ ent.id }}" name="category_detail" id="id_cat_detail">
+				<input type="hidden" name="h_cat_name" value="{{ display_cat.category_name }}">
+				<input type="submit" value="delete entry" name="category_detail" id="id_cat_detail">
+				
 				{% csrf_token %}
 			</form>
+			
+			
+			
 			<table id="id_inner_entry" class="table">
 			<tr>
 				<td>Entry Number</td>
@@ -40,17 +71,10 @@
 			</tr>
 			</table>
 		</td></tr>
+		<tr><td><hr class="shadow p-1 mb-3 bg-white rounded" /></td></tr>
 	 {% endfor %}
-	<ul>
-<li>here {{ display_entries }} </li>
-		{% for entry in display_entries %}
-			<li>
-				{{ entry.entry_note }}: 				
-				
-			</li>			
-		{% endfor %}
+	 {% endif %}
 
-	</ul>
 {% endblock %}
 
 <!-- {% block optional_action %}{%  url 'budgetReboot:listcats' display_user_name %}{% endblock %} -->

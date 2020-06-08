@@ -17,13 +17,28 @@
 		<div class="row">
 		
 			<div class="alert alert-danger col-md-10 col-md-offset-3" role="alert">
-			<div class="text-center">				
+			<div class="text-center">	
+				<table>
+					<tr>
+						<td>|<a href="\">home</a>|</td>
+						<td>{% block list_link1 %} {% endblock %}|</td>						
+					</tr>
+				</table>
 				<h1>{% block header_text %}{% endblock %}</h1>
 				<h2> <small class="text-muted"> {% block name_text %} {% endblock %} </small></h2>
 				{% block data_ag %} {% endblock %}
 			</div>				
 			</div>
 <!---------------------- POST form section -->
+			
+			<div class="text-center">				
+				{% block post_form_header2 %} {% endblock %} 
+				<form method="POST" action="{% block post_form_action2 %}{% endblock %}">
+					{% csrf_token %}
+					{% block post_form_item2 %}{% endblock %}
+					{% block post_form_button2 %}{% endblock %}
+				</form>
+			</div>
 			
 			<div class="col-md-10 col-md-offset-3 jumbotron">
 				<div class="text-center">				
@@ -36,10 +51,15 @@
 				</div>
 			</div>
 			
+			
+				
+			
+			
 <!-------------------- GET form section -->
 			
 			<div class="alert alert-dark col-md-10" role="alert" >	
 				{% block get_form_header %} {% endblock %} 
+				{% block get_text %} {% endblock %} 
 				<form method="GET" action="{% block get_form_action %}{% endblock %}">
 					{% csrf_token %}
 					{% block get_form_item %}{% endblock %}

@@ -44,7 +44,7 @@ class usertypeView(FormView):
             return HttpResponseNotFound("AggregateStats, a integral part of the data for a user, is missing")
             
         try: 
-            p_user_ag_data = AgStatsPeriod.objects.get(ag = user_ag_data)
+            p_user_ag_data = AgStatsPeriod.objects.get(ag = user_ag_data, numeric_month=timezone.now().month, numeric_year=timezone.now().year)
         except AgStatsPeriod.DoesNotExist:
             return HttpResponseNotFound("AggregateStatsPeriod, a integral part of the data for a user, is missing")
        
@@ -136,7 +136,7 @@ class catdetailView(View):
                 v_agStats.grand_total += decimal.Decimal(e_amt)
                 v_agStats.save()
             
-                v_agStatsPer = AgStatsPeriod.objects.get(ag=v_agStats)
+                v_agStatsPer = AgStatsPeriod.objects.get(ag=v_agStats, numeric_month=timezone.now().month, numeric_year=timezone.now().year)
                 v_agStatsPer.month_total += decimal.Decimal(e_amt)
                 v_agStatsPer.save()
             except:
@@ -189,6 +189,7 @@ class delentryView(View):
         v_users_name = request.POST.get('h_users_name')
         v_category_name = request.POST.get('h_cat_name')
         
+        archive_date_form = PickArchiveDateForm()
         add_entry_form = AddEntryForm()       
             
         v_user = get_object_or_404(User, users_name=v_users_name)                   
@@ -198,8 +199,11 @@ class delentryView(View):
         v_this_category.overall_total -= del_entry_amt
         v_this_category.total_entries -= 1
         v_this_category.save()
-        
-        v_this_category_this_period = CatPeriod.objects.get(cat=v_this_category)
+                
+        v_numeric_month = timezone.now().month
+        v_numeric_year = timezone.now().year
+                
+        v_this_category_this_period = CatPeriod.objects.get(cat=v_this_category, numeric_month=v_numeric_month, numeric_year=v_numeric_year)
         v_this_category_this_period.monthly_total -= del_entry_amt
         v_this_category_this_period.monthly_entry_count -= 1
         v_this_category_this_period.save()
@@ -207,9 +211,6 @@ class delentryView(View):
         user_ag_data = AggregateStats.objects.get(owning_user=v_user) ##tbd this should be get
         user_ag_data.grand_total -= del_entry_amt
         user_ag_data.save()
-        
-        v_numeric_month = timezone.now().month
-        v_numeric_year = timezone.now().year
         
         p_user_ag_data = AgStatsPeriod.objects.get(ag = user_ag_data, numeric_month=v_numeric_month, numeric_year=v_numeric_year)
         p_user_ag_data.month_total -= del_entry_amt
@@ -227,6 +228,7 @@ class delentryView(View):
             v_cat_avg_month = 0       
         
         return render(request, self.template_name, {'formy' : add_entry_form, 
+                                                    'archiveform' : archive_date_form,
                                                     'display_user_name' : v_users_name,                                                     
                                                     'display_cat' : v_this_category,
                                                     'display_entries' : v_entry_list,

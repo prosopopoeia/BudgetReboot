@@ -48,9 +48,45 @@ amount
 
 entry2...
 
+==================
 
+parse bank statements:
+
+read entry source
+
+savings:
+	add all non- ONLINE XFER entries
+
+checking:
+	read all debits (non-ONLINE XFER)
+	
+ -date
+ -AMT
+ -source
+ 
+ -FIND ENTRY, SEPARATE INTO
+ -amt
+	if(new source)
+	     ask user to classify
+	else
+		add
+		
+		
+db:
+	change entry to include source
+
+----find heading SAVINGS ACCOUNT
+		--FIND DATE
+			PUT IN DICT.
+				DATE:	VALUE
+				AMT: 	VALUE
+				SOURCE:	VALUE
 
 	
+
+
+identify a transaction 
+	\d\d/\d\d to \d\d/\d\d
 
 
 

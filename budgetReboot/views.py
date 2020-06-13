@@ -3,13 +3,13 @@ from django.views.generic.edit import FormView
 from django.views.generic import View
 from django.views.generic.detail import DetailView
 #from django.views.generic.list import ListView
-from .forms import NameForm, AddCatForm, AddEntryForm, PickArchiveDateForm
+from .forms import NameForm, AddCatForm, AddEntryForm, PickArchiveDateForm, GetStatementPathForm
 from .models import Category, User, Entry, CatPeriod, AggregateStats, AgStatsPeriod
 from django.shortcuts import get_object_or_404, redirect
 from django.http import HttpResponseNotFound
 from django.views.generic.edit import DeleteView
 from django.urls import reverse_lazy
-from .utils import eMonth, utils
+from .utils import eMonth, utils, pdfHandler
 from django.utils import timezone
 import decimal
 
@@ -100,7 +100,27 @@ class archivelistView(View):
                                                     'p_agstats' : p_user_ag_data,
                                                     'month_avg' : round(v_cat_avg_month, 2),
                                                     })   
-            
+
+class parsebankdataView(View):
+    template_name = 'budgetReboot/parsebankdata.html'
+    
+    def get(self, request, p_users_name):
+        statement_path_form = GetStatementPathForm()
+        return render(request, self.template_name, {'display_user_name' : p_users_name,                                                     
+                                                    'form' : statement_path_form}) 
+                                                        
+    def post(self, request, p_users_name):
+        v_statement_path = request.POST.get('statement_path') 
+        
+        statement_path_form = GetStatementPathForm()
+        pdfHandler.parsePdf('C:\\Users\\ngwtt\\source\\repos\\djangoRepo\\BudgetReboot\\AmazingBudgetSite\\tst.pdf')
+        #p_users_name = utils.tessy()
+        return render(request, self.template_name, {'display_user_name' : p_users_name,                                                     
+                                                    'form' : statement_path_form}) 
+        
+
+    
+
 class catdetailView(View):
     template_name = 'budgetReboot/catdetail.html'
        

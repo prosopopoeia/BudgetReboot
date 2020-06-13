@@ -8,3 +8,7 @@ db.sqlite3
 /budgetReboot/static/bootstrap-4.4.1-dist
 /budgetReboot/static/bootstrap.css.map
 /budgetReboot/__pycache__
+*.pdf
+testPDF.py
+tst.txt
+singlinetst.txt

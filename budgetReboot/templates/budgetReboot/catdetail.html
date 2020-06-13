@@ -9,6 +9,7 @@
 {% endblock %}
 
 {% block post_form_header %}<h4> Add New Entry </h4> {% endblock %}
+{% block list_link2 %}<a href="{%  url 'budgetReboot:parsebankdata' display_user_name %}"> add data</a>{% endblock %}|
 {% block list_link1 %} <a href="{%  url 'budgetReboot:listcats' display_user_name %}">Category List</a> {% endblock %}
 
 {% block post_form_action2 %}{%  url 'budgetReboot:archivelist' display_cat.category_name %}{% endblock %}

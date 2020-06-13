@@ -22,6 +22,7 @@ urlpatterns = [
     path('', views.indexView.as_view(), name='index'),
     path('listcats/', views.listcatsView.as_view(), name='listcats'),#tbd tbd remove tbd tbd
     path('usertype/', views.usertypeView.as_view(), name='usertype'),
+    path('parsebankdata/<str:p_users_name>', views.parsebankdataView.as_view(), name='parsebankdata'),
     path('listcats/<str:p_users_name>', views.listcatsView.as_view(), name='listcats'),
     path('archivelist/<str:h_category_name>', views.archivelistView.as_view(), name='archivelist'),
     path('archivelist/', views.archivelistView.as_view(), name='archivelist'), ###remove TBD TBD TBD TBD

@@ -15,3 +15,6 @@ class PickArchiveDateForm(forms.Form):
     #archive_date = forms.DateField(initial=datetime.date.today, label = "Format: yyyy-mm-dd-")
     archive_mo = forms.IntegerField(label = "Enter Numeric Month")
     archive_yr = forms.IntegerField(label = "Enter Numeric Year")
+    
+class GetStatementPathForm(forms.Form):
+    statement_path = forms.CharField(max_length=200, label="bank statement path")

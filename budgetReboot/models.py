@@ -43,7 +43,8 @@ class CatPeriod(models.Model):
     
 class Entry(models.Model):
     cat = models.ForeignKey(CatPeriod, on_delete=models.CASCADE)
-    entry_note=models.CharField(default='',max_length=11)
+    entry_note = models.CharField(default='', max_length=11)
+    source = models.CharField(default='', max_length=25)
     amount = models.DecimalField(default=0, max_digits=11, decimal_places=2)
     transaction_date=models.DateTimeField('transaction date',default=timezone.now, blank=True)
     
